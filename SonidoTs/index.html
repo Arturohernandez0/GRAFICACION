@@ -1,0 +1,154 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation Starter Template</title>
+    <!-- Compressed CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" xintegrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css"> <!-- Updated stylesheet link -->
+    <style>
+      /* Estilos para el canvas para que ocupe todo el espacio disponible */
+      #circlechart {
+          width: 100%;
+          height: 100%;
+          display: block;
+          background-color: black;
+      }
+      /* Estilos para el SVG del caracol */
+      #snail {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 800px; /* Tamaño del caracol */
+          /* Eliminado: z-index: -1; para que el caracol se muestre encima del canvas */
+      }
+      #snail path {
+          stroke-dasharray: 1500;
+          stroke-dashoffset: 0;
+          animation: animatePath 5s infinite;
+      }
+      @keyframes animatePath {
+          0% {
+              stroke-dasharray: 1520;
+          }
+          50% {
+              stroke-dasharray: -1520;
+          }
+          100% {
+              stroke-dasharray: 1520;
+          }
+      }
+      body {
+          overflow: hidden; /* Evita el scroll */
+          background: black; /* Asegura que el fondo del body sea negro */
+      }
+      .card-body {
+          position: relative; /* Para posicionar el mensaje de error */
+      }
+      .error-message {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(255, 0, 0, 0.8);
+          color: white;
+          padding: 20px;
+          border-radius: 10px;
+          z-index: 1000;
+          text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Graficación</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Abrir</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Visualizar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Expandir</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Acerca de
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Equipo de Desarrollo</a></li>
+                  <li><a class="dropdown-item" href="#">Versión</a></li>
+                  <li><a class="dropdown-item" href="#">Contacto</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="card text-center">
+        <div class="card-header">
+          Canvas de visualización
+        </div>
+        <div class="chart card-img-bottom" style="height: 600px; position: relative;"> <!-- Ajusta la altura del contenedor del canvas -->
+            <canvas id="circlechart"></canvas>
+            <!-- SVG del caracol insertado aquí -->
+            <svg id="snail" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496.07 269.85">
+              <defs>
+                <style>.cls-1{fill:none;stroke:url(#gradient);stroke-miterlimit:10;stroke-width:2;}</style>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="red" />
+                    <stop offset="20%" stop-color="yellow" />
+                    <stop offset="40%" stop-color="green" />
+                    <stop offset="60%" stop-color="cyan" />
+                    <stop offset="80%" stop-color="blue" />
+                    <stop offset="100%" stop-color="magenta" />
+                </linearGradient>
+              </defs>
+              <path class="cls-1" d="M416.48,101.23s-2.22-62.5,8.45-87.83c0,0-6.22-11.56,5.33-12.89,0,0,11.56,2.66,0,12.89,0,0-12.89,58.33,1.78,87.83,0,0,8-1.17,12.89,3.72,0,0,29.78-70.22,38.67-77.78,0,0-4-16,8.88-12.44,0,0,9.34,8-4.44,13.33,0,0-36,62.22-28.44,93.34,0,0,18.22,36.88-31.12,74.66s-25.27,54.22-12.19,59.56-14.92,19.55-36.69,11.11-34.67-10.22-62.67-5.78-39.11,2.22-63.11-3.11-23.56,7.56-44.45,7.56-43.55-4.45-56.89-10.67c0,0-19.11-2.22-41.33,6.67,0,0-25.33,0-43.11-9.34,0,0-15.56-1.78-29.33,6.22,0,0-30.23-.88-37.78-25.77,0,0-8.89-11.11,54.22-7.11,0,0,80-14.67,117.78-39.56s92.44-11.11,100.44-10.67S327.6,173,340,163.62s26.67-22.22,37.33-23.56S392.54,100.31,416.48,101.23Z"/>
+              <path class="cls-1" d="M432.63,157.45s-14.82,6.4-18.92,5.38-8.53-3.55-10,2.89,7.36,4.4,10.48,1.64,14.22-2.84,18.3.27"/>
+              <path class="cls-1" d="M456.72,164.49s15.1,1.78,19.3,5.41,7.73,8.15,11.57,3.66-1.76-7.57-7.4-6.83-18.74-6.83-19.43-10.62"/>
+              <path class="cls-1" d="M430.26,187s-4-15-29-3.86S368.93,221.62,343.6,235s-40.89,27.39-60.78,28"/>
+            </svg>
+          </div>
+        <div class="card-body">
+          <h5 class="card-title">Visualizador de Audio</h5>
+          <p class="card-text">Esta es el área de dibujo disponible, que reacciona al micrófono.</p>
+        </div>
+        <div class="card-footer text-muted">
+          Actualizado recientemente
+        </div>
+      </div>
+
+      <footer id="footer" class="pb-4 pt-4">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-12 col-lg">
+              <a href="#">Repositorio Principal</a>
+            </div>
+            <div class="col-12 col-lg">
+              <a href="#">Contáctanos</a>
+            </div>
+            <div class="col-12 col-lg">
+              <a href="#">Estudiantes</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+     <!-- Compressed JavaScript -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
+        xintegrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="./dist/src/index.js" type="module"></script> <!-- Script principal -->
+  </body>
+</html>
